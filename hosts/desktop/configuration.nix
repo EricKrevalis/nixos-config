@@ -25,23 +25,23 @@
     LC_TIME           = "de_DE.UTF-8";
   };
 
-  # Temporary: KDE Plasma 6 until Sway is set up (Hyprland was dropped)
-  services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # Sway (Wayland), replaced KDE Plasma 6 + SDDM.
+  # Login: TTY autologin → exec sway (see home/home.nix zsh profileExtra).
+  # Fallback: the previous generation still has KDE/SDDM in the boot menu.
+  programs.sway.enable = true;
+  services.getty.autologinUser = "eric";
+
+  # Keyboard layout (also used by XWayland apps)
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
 
-  # GPU: NVIDIA RTX 3060 Ti (Ampere). Needed for Wayland (KDE/Sway) + gaming.
-  # ▶ CURRENTLY TESTING: stable branch + open kernel modules (open = true).
-  # Note: both open=true/false use the proprietary userspace driver (neither is
-  # nouveau); `open` only swaps the kernel module. The old Linux Mint setup ran
-  # the CLOSED modules (open=false) well, so this open=true run is the experiment.
-  # If this build misbehaves (flicker, black screen, suspend issues): roll back to
-  # the previous generation from the boot menu, then try open=false and/or another
-  # branch (production/beta/latest).
+  # GPU: NVIDIA RTX 3060 Ti (Ampere), proprietary driver for Wayland + gaming.
+  # Testing the stable branch with the open kernel modules. `open` only swaps the
+  # kernel module; both settings use the proprietary userspace driver, not nouveau.
+  # Mint ran the closed modules fine, so that's the fallback: if this flickers or
+  # breaks on suspend, roll back from the boot menu and set open = false.
   hardware.graphics = {
     enable = true;
     enable32Bit = true; # 32-bit GL for Steam/Proton
@@ -49,10 +49,10 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     modesetting.enable = true; # required for Wayland; enables explicit sync path
-    open = true;               # TESTING open kernel modules (vs closed, which Mint ran well)
+    open = true; # testing; fallback is open = false (see above)
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable; # TESTING stable branch
-    powerManagement.enable = false; # enable only if suspend/resume corrupts the display
+    package = config.boot.kernelPackages.nvidiaPackages.stable; # testing this branch
+    powerManagement.enable = false; # enable if suspend/resume corrupts the display
   };
 
   services.printing.enable = true;
