@@ -3,9 +3,9 @@
 # base system plus the sway desktop, every host gets this. the extended and specialized
 # tiers are opt in from flake.nix common. gpu is a separate hardware module (nvidia.nix).
 let
-  # nvidia needs a few wlroots env vars and an extra sway flag, integrated gpus do not
+  # nvidia needs a couple wlroots env vars and an extra sway flag, integrated gpus do not
+  # hardware cursors left on, re-add export WLR_NO_HARDWARE_CURSORS=1 if a fullscreen game hides the cursor
   nvidiaEnv = lib.optionalString config.host.nvidia ''
-    export WLR_NO_HARDWARE_CURSORS=1
     export GBM_BACKEND=nvidia-drm
     export __GLX_VENDOR_LIBRARY_NAME=nvidia
   '';

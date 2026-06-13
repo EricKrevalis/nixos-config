@@ -36,7 +36,8 @@ game:
 ## hardware / system
 
 - [ ] gpu testing under real load (games, xwayland) to validate nvidia stable+open
-- [ ] cpu microcode: verify amd microcode is loading
+- [ ] hardware cursors: removed WLR_NO_HARDWARE_CURSORS, clean on desktop, retest with and without under a fullscreen xwayland game
+- [x] cpu microcode: amd microcode is managed (updateMicrocode on via redistributable firmware), running 0xa201030, bios already at that level
 - [ ] kernel choice: weigh zen vs default lts for gaming
 - [ ] udev rules for the input and audio peripherals
 - [ ] mic interface utility service
