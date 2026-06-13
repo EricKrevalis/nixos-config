@@ -24,7 +24,8 @@
         gitEmail = "you@example.com";
         nvidia = false; # set true per host for the proprietary nvidia stack
         extended = true; # feature complete desktop for normal use, the recommended default
-        specialized = false; # dev and gaming layer on top of extended
+        specializedDev = false; # dev tools layer on top of extended
+        specializedGame = false; # gaming layer on top of extended
       };
 
       # one call per machine, settings is common merged with per-host overrides, threaded

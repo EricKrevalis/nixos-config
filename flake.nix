@@ -22,7 +22,8 @@
         gitEmail = "eric.krevalis@gmail.com";
         nvidia = false; # set true per host for the proprietary nvidia stack
         extended = false; # feature complete desktop for normal use
-        specialized = false; # dev and gaming layer on top of extended
+        specializedDev = false; # dev tools layer on top of extended
+        specializedGame = false; # gaming layer on top of extended
       };
 
       # one call per machine, settings is common merged with per-host overrides, threaded
@@ -54,7 +55,8 @@
           hostname = "desktop";
           nvidia = true; # RTX 3060 Ti
           extended = true;
-          specialized = true;
+          specializedDev = true;
+          specializedGame = true;
         });
 
         # laptop stays out until hosts/laptop/hardware-configuration.nix exists, the stub

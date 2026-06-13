@@ -16,13 +16,15 @@ in
     ./options.nix
     ./nvidia.nix # inert unless host.nvidia = true
     ./extended.nix # inert unless host.extended = true
-    ./specialized.nix # inert unless host.specialized = true
+    ./specialized-dev.nix # inert unless host.specializedDev = true
+    ./specialized-game.nix # inert unless host.specializedGame = true
   ];
 
   # per-host settings feed the typed host.* schema in options.nix
   host.nvidia = settings.nvidia;
   host.extended = settings.extended;
-  host.specialized = settings.specialized;
+  host.specializedDev = settings.specializedDev;
+  host.specializedGame = settings.specializedGame;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

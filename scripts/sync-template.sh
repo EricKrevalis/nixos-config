@@ -13,7 +13,8 @@ synced=(
   modules/options.nix
   modules/nvidia.nix
   modules/extended.nix
-  modules/specialized.nix
+  modules/specialized-dev.nix
+  modules/specialized-game.nix
   home/basic.nix
 )
 
