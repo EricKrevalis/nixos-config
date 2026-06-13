@@ -9,18 +9,33 @@ rough priority order, lower items lean on earlier ones being stable.
 
 ## up next
 
-- bloat audit: review default packages and services, drop anything unused
-- test the flake on a clean environment (vm or fresh install)
 - prune old system generations once the config is stable
+- add trash can
+- add usb auto mount config nix code
+- fix nvidia settings not working (no fan control, no monitors)
+- add more basic layers programs for full feature functionality
+- edit/adjust default programs
 
-## software stack (extended / dev / game)
 
-extended:
-- [ ] terminal image viewer (?)
-- [ ] screenshot tool (grimblast or grim + slurp)
-- [ ] notification daemon (mako or dunst)
-- [ ] network applet or status indicator
-- [ ] mpv
+## software stack (phase 3)
+
+desktop features still missing, tool choice per feature TBD:
+- [ ] clipboard with history
+- [ ] notifications
+- [ ] screenshots (capture, region, annotate)
+- [ ] gui authentication prompts (no polkit agent yet, some prompts fail silently)
+- [ ] media key control
+- [ ] status bar (network, clock, audio at a glance)
+- [ ] night light
+- [ ] video playback
+- [ ] image viewing
+- [ ] pdf viewing
+- [ ] archive handling
+- [ ] trash, recoverable delete instead of gone forever
+- [ ] usb drives auto-mount on plug in (fold in my local change)
+- [ ] gpu fan and clock control that works on wayland
+- [ ] default app per file type (md, txt, pdf, images, audio, video)
+- [ ] firefox config in the repo, not hand-pasted into ~/.mozilla
 
 dev:
 - [ ] editors and lsp tooling
@@ -53,7 +68,7 @@ game:
 
 - [ ] zsh plugins, prompt (starship or similar)
 - [ ] neovim config
-- [ ] alacritty config
+- [x] alacritty config: atkynson mono nerd font, size 12, package null (system alacritty)
 - [ ] remaining ssh work (tunnel/jump hosts, per secrets.md)
 
 ## secrets
