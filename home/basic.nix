@@ -70,9 +70,46 @@ in
         # propagate session vars into the systemd user session so user services
         # (polkit agents, etc.) can see XDG_SESSION_ID and wayland socket vars
         { command = "systemctl --user import-environment XDG_SESSION_ID XDG_SESSION_TYPE WAYLAND_DISPLAY DISPLAY"; }
+        { command = "waybar"; }
         { command = "wl-paste --watch cliphist store"; }
         { command = "wl-paste --primary --watch cliphist store"; }
       ];
+      window = {
+        border = 1;
+        titlebar = false;
+      };
+
+      colors = {
+        focused = {
+          border      = "#2d5a27";
+          background  = "#2d5a27";
+          text        = "#ffffff";
+          indicator   = "#2d5a27";
+          childBorder = "#2d5a27";
+        };
+        unfocused = {
+          border      = "#1c1c1c";
+          background  = "#1c1c1c";
+          text        = "#888888";
+          indicator   = "#1c1c1c";
+          childBorder = "#1c1c1c";
+        };
+        focusedInactive = {
+          border      = "#1c1c1c";
+          background  = "#1c1c1c";
+          text        = "#888888";
+          indicator   = "#1c1c1c";
+          childBorder = "#1c1c1c";
+        };
+        urgent = {
+          border      = "#cc3333";
+          background  = "#cc3333";
+          text        = "#ffffff";
+          indicator   = "#cc3333";
+          childBorder = "#cc3333";
+        };
+      };
+
       keybindings = lib.mkOptionDefault {
         "${mod}+v"             = "exec bash -c 'cliphist list | fuzzel --dmenu | cliphist decode | tee >(wl-copy --primary) | wl-copy'";
         "Print"                = "exec grim - | satty --filename -";
@@ -97,6 +134,9 @@ in
       border-radius = 4;
     };
   };
+
+  xdg.configFile."waybar/config.jsonc".source = ../configs/waybar/config.jsonc;
+  xdg.configFile."waybar/style.css".source   = ../configs/waybar/style.css;
 
   xdg.configFile."satty/config.toml".text = ''
     [general]

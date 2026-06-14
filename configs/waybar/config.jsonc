@@ -1,0 +1,46 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 28,
+    "spacing": 4,
+
+    "modules-left": [
+        "sway/workspaces",
+        "wlr/taskbar"
+    ],
+    "modules-center": [],
+    "modules-right": [
+        "tray",
+        "pulseaudio",
+        "clock"
+    ],
+
+    "sway/workspaces": {
+        "disable-scroll": true
+    },
+
+    "wlr/taskbar": {
+        "on-click": "activate",
+        "on-click-right": "close",
+        "icon-size": 16,
+        "tooltip": false
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8
+    },
+
+    "pulseaudio": {
+        "format": "{volume}% {icon}",
+        "format-muted": "muted",
+        "format-icons": {
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "wiremix"
+    },
+
+    "clock": {
+        "format": "{:%Y-%m-%d  %H:%M}"
+    }
+}

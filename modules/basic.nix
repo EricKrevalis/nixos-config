@@ -165,6 +165,7 @@ in
     slurp # region selector, pairs with grim
     satty # screenshot annotation
     playerctl # media key control (MPRIS)
+    waybar # status bar
   ];
 
   services.openssh = {
