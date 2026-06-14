@@ -4,26 +4,24 @@ rough priority order, lower items lean on earlier ones being stable.
 
 ## in progress
 
-- build out the extended, dev, and game tiers with the actual software stack
+- finish the basic tier: feature complete, debloated, settings optimized and personalized.
+  the extended/dev/game tiers stay parked until basic is done. work the software stack below.
 - push repo to github (secrets and ssh are done, so this is unblocked)
 
 ## up next
 
 - prune old system generations once the config is stable
-- add trash can
-- add usb auto mount config nix code
 - fix nvidia settings not working (no fan control, no monitors)
-- add more basic layers programs for full feature functionality
-- edit/adjust default programs
+- edit/adjust default programs, question each one
 
 
 ## software stack (phase 3)
 
 desktop features still missing, tool choice per feature TBD:
-- [ ] clipboard with history
+- [x] clipboard with history
 - [ ] notifications
 - [ ] screenshots (capture, region, annotate)
-- [ ] gui authentication prompts (no polkit agent yet, some prompts fail silently)
+- [x] gui authentication prompts (soteria polkit agent)
 - [ ] media key control
 - [ ] status bar (network, clock, audio at a glance)
 - [ ] night light
@@ -31,8 +29,8 @@ desktop features still missing, tool choice per feature TBD:
 - [ ] image viewing
 - [ ] pdf viewing
 - [ ] archive handling
-- [ ] trash, recoverable delete instead of gone forever
-- [ ] usb drives auto-mount on plug in (fold in my local change)
+- [x] trash, recoverable delete instead of gone forever (trashy)
+- [x] usb drives auto-mount on plug in (thunar-volman + xfconf)
 - [ ] gpu fan and clock control that works on wayland
 - [ ] default app per file type (md, txt, pdf, images, audio, video)
 - [ ] firefox config in the repo, not hand-pasted into ~/.mozilla
