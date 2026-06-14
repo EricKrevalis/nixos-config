@@ -161,6 +161,9 @@ in
     wl-clipboard # wayland clipboard tools
     cliphist # clipboard history
     libnotify # notify-send for scripted notifications
+    grim # wayland screenshot capture
+    slurp # region selector, pairs with grim
+    satty # screenshot annotation
   ];
 
   services.openssh = {

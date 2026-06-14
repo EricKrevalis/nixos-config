@@ -74,7 +74,9 @@ in
         { command = "wl-paste --primary --watch cliphist store"; }
       ];
       keybindings = lib.mkOptionDefault {
-        "${mod}+v" = "exec bash -c 'cliphist list | fuzzel --dmenu | cliphist decode | tee >(wl-copy --primary) | wl-copy'";
+        "${mod}+v"       = "exec bash -c 'cliphist list | fuzzel --dmenu | cliphist decode | tee >(wl-copy --primary) | wl-copy'";
+        "Print"          = "exec grim - | satty --filename -";
+        "Shift+Print"    = "exec grim -g \"$(slurp)\" - | satty --filename -";
       };
     };
   };
@@ -86,6 +88,19 @@ in
       border-radius = 4;
     };
   };
+
+  xdg.configFile."satty/config.toml".text = ''
+    [general]
+    early-exit = true
+    save-after-copy = true
+    output-filename = "/home/${settings.username}/Pictures/screenshot-%Y-%m-%d_%H:%M:%S.png"
+    copy-command = "wl-copy"
+    initial-tool = "arrow"
+    annotation-size-factor = 2
+    corner-roundness = 4
+    '';
+
+  home.file."Pictures/.keep".text = ""; # creates ~/Pictures before the first save
 
   xdg.configFile."nvim/init.lua".text = ''
     vim.opt.clipboard = "unnamedplus"

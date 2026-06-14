@@ -13,14 +13,15 @@ rough priority order, lower items lean on earlier ones being stable.
 - prune old system generations once the config is stable
 - fix nvidia settings not working (no fan control, no monitors)
 - edit/adjust default programs, question each one
+- full basic stack customization pass: once all features are installed, go back and tune settings, keybinds, and config files for every tool (sway, mako, satty, alacritty, fuzzel, etc.)
 
 
 ## software stack (phase 3)
 
 desktop features still missing, tool choice per feature TBD:
 - [x] clipboard with history
-- [ ] notifications
-- [ ] screenshots (capture, region, annotate)
+- [x] notifications
+- [ ] screenshots, needs tuning after first use (grim, slurp, satty)
 - [x] gui authentication prompts (soteria polkit agent)
 - [ ] media key control
 - [ ] status bar (network, clock, audio at a glance)
