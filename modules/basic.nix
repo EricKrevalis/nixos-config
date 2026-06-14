@@ -72,9 +72,31 @@ in
   # accelerated GL for wayland/sway, every gpu needs this
   hardware.graphics.enable = true;
 
+  # graphical polkit agent for gui apps needing elevation, cli falls back to pkttyagent
+  security.soteria.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    # wlr handles screen capture; gtk covers everything else (file picker, inhibit, settings)
+    config.sway = {
+      default = [ "gtk" ];
+      "org.freedesktop.impl.portal.ScreenCast"  = [ "wlr" ];
+      "org.freedesktop.impl.portal.Screenshot"  = [ "wlr" ];
+    };
+  };
+
   programs.firefox.enable = true;
 
   services.udisks2.enable = true; # drive mounting backend, needed for USB automount and udisksctl
+
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs; [ thunar-volman thunar-archive-plugin ];
+  };
+  services.gvfs.enable = true;    # trash, MTP devices, network locations
+  services.tumbler.enable = true; # thumbnail generation
 
   hardware.bluetooth.enable = true; # powers on at boot so paired audio devices reconnect
 
@@ -135,6 +157,9 @@ in
     fuzzel # launcher
     bluetui # Bluetooth TUI
     wiremix # audio TUI
+    trashy # recoverable delete
+    wl-clipboard # wayland clipboard tools
+    cliphist # clipboard history
   ];
 
   services.openssh = {
