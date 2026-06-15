@@ -1,4 +1,4 @@
-{ settings, lib, ... }:
+{ settings, lib, pkgs, ... }:
 
 # home-side dev tooling, gated like core/modules/specialized/dev.nix.
 lib.mkIf settings.dev {
@@ -12,12 +12,17 @@ lib.mkIf settings.dev {
     };
   };
 
-  # use delta as lazygit's pager too
+  # delta as lazygit's pager. pagers array, not the old paging object (0.62+)
   programs.lazygit = {
     enable = true;
-    settings.git.paging = {
-      colorArg = "always";
-      pager = "delta --paging=never";
+    settings = {
+      os.editPreset = "nvim";
+      git.pagers = [
+        {
+          colorArg = "always";
+          pager = "delta --paging=never";
+        }
+      ];
     };
   };
 }
