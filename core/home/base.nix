@@ -98,6 +98,13 @@ in
       window = {
         border = 1;
         titlebar = false;
+        commands = [
+          {
+            # proton/xwayland windows tile by default, force them fullscreen. class is steam_app_<id>
+            criteria.class = "^steam_app_[0-9]+$";
+            command = "fullscreen enable";
+          }
+        ];
       };
 
       colors = {
