@@ -393,6 +393,17 @@ in
     };
   };
 
+  # exo has no built-in helper for alacritty, so thunar's "open terminal here" errors out
+  xdg.dataFile."xfce4/helpers/alacritty.desktop".text = ''
+    [Desktop Entry]
+    Type=X-XFCE-Helper
+    X-XFCE-Category=TerminalEmulator
+    Name=Alacritty
+    X-XFCE-Commands=alacritty
+    X-XFCE-CommandsWithParameter=alacritty -e %s
+  '';
+  xdg.configFile."xfce4/helpers.rc".text = "TerminalEmulator=alacritty\n";
+
   # sway base. per-host monitor layout lives in hosts/<host>/home.nix.
   # the session launch is system-level (core/modules/base.nix), not here.
   wayland.windowManager.sway = {
