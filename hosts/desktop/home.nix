@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, pkgs, ... }:
 
 {
   # HDMI-A-1 = Zowie XL    (sn GAG02576SL0)    left,   60Hz
@@ -26,4 +26,22 @@
 
   # generic audio drop-in only, device-specific ones are in configs/wireplumber
   xdg.configFile."wireplumber/wireplumber.conf.d".source = ../../configs/wireplumber;
+
+  # pipewire daemon drop-in, clock rate and resampler quality
+  xdg.configFile."pipewire/pipewire.conf.d/99-sample-rate.conf".source = ../../configs/pipewire/99-sample-rate.conf;
+
+  # sync the goxlr profile, mic profile and presets from the repo on every rebuild
+  # copy not symlink, the daemon rewrites this dir at runtime so it cannot be read-only
+  # repo wins each build, tweak it in the UI then copy back here to keep a change
+  home.activation.syncGoxlr = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    src=${../../configs/goxlr}
+    data="$HOME/.local/share/goxlr-utility"
+    cfg="$HOME/.config/goxlr-utility"
+    run mkdir -p "$data" "$cfg"
+    run cp -r --no-preserve=mode "$src/profiles" "$src/mic-profiles" "$src/presets" "$data/"
+    run cp --no-preserve=mode "$src/settings.json" "$cfg/settings.json"
+    # hot-load the refreshed profiles by name, no-ops if the daemon is not up yet
+    run ${pkgs.goxlr-utility}/bin/goxlr-client profiles device load Default || true
+    run ${pkgs.goxlr-utility}/bin/goxlr-client profiles microphone load DEFAULT || true
+  '';
 }
