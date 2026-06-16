@@ -8,19 +8,21 @@ lib.mkIf settings.gaming {
     settings = {
       fps = true;
       frametime = true;
-      frame_timing = true; # the stutter graph
+      frame_timing = false; # the stutter graph
       gpu_stats = true;
       gpu_temp = true;
       cpu_stats = true;
       cpu_temp = true;
-      vram = true;
+      vram = true; 
       ram = true;
-      gamemode = true; # confirms gamemode actually engaged
+      gamemode = false; # confirms gamemode actually engaged
 
       position = "top-left";
       font_size = 14;
-      alpha = 0.65;
-      background_alpha = 0.35;
+      width = 150;
+      alpha = 0.35;
+      background_alpha = 0.25;
+      fps_sampling_period = 500; #default, but changes CPU draw
       toggle_hud = "Shift_R+F12";
     };
   };
