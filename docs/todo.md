@@ -52,10 +52,10 @@ dev:
 - [ ] fix claude fullscreen render in terminal
 
 game:
-- [ ] steam + proton
-- [ ] gamemode
-- [ ] gamescope
-- [ ] mangohud
+- [x] steam + proton
+- [x] gamemode
+- [x] gamescope
+- [x] mangohud
 
 ## hardware / system
 
@@ -69,10 +69,10 @@ game:
 
 ## audio
 
-- [ ] set pipewire sample rate / allowed rates and quantum, match the devices to avoid resampling
-- [ ] wireplumber config for the mic chain
-- [ ] microphone settings: gain, input levels, any processing
-- [ ] wireplumber config for the dac output
+- [x] pipewire sample rate + allowed rates (44.1k/48k) and resample quality set, quantum left default
+- [x] wireplumber config for the mic chain, goxlr mic only, extra channels hidden
+- [x] microphone settings live in the goxlr profile, versioned in configs/goxlr
+- [x] wireplumber config for the dac output, g6 prioritized, its capture dropped
 - [ ] test routing between both devices
 
 ## home manager
