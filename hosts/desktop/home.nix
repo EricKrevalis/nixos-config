@@ -31,7 +31,7 @@
   xdg.configFile."pipewire/pipewire.conf.d/99-sample-rate.conf".source = ../../configs/pipewire/99-sample-rate.conf;
 
   # sync the goxlr profile, mic profile and presets from the repo on every rebuild
-  # copy not symlink, the daemon rewrites this dir at runtime so it cannot be read-only
+  # copy not symlink, a read-only store link blocks the daemon writing this dir
   # repo wins each build, tweak it in the UI then copy back here to keep a change
   home.activation.syncGoxlr = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     src=${../../configs/goxlr}
