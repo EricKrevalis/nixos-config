@@ -16,29 +16,20 @@ rough priority order, lower items lean on earlier ones being stable.
 
 ## software stack, ~ means testing
 ### noted links for research: https://github.com/swaywm/sway/wiki/Useful-add-ons-for-sway  https://github.com/Alexays/Waybar/wiki/Examples
-desktop features still missing, tool choice per feature TBD:
-- [x] clipboard with history
-- [x] notifications
+desktop features, tool choice per feature TBD:
+
+done: clipboard history, notifications, gui auth (soteria), media keys, night light, video playback (mpv), trash (trashy), usb auto-mount (thunar-volman), keyboard repeat (200ms/60Hz), shell stack (zoxide as cd, fzf, starship » arrows + nerd-font preset)
+
 - [~] screenshots, needs tuning after first use (grim, slurp, satty)
-- [x] gui authentication prompts (soteria polkit agent)
-- [x] media key control
 - [~] status bar (network, clock, audio at a glance)
-- [x] night light
-- [x] video playback
-- [~] status bar (network, clock, audio at a glance)
-- [~]  image viewing
-- [x] night light
+- [~] image viewing
 - [~] pdf viewing
 - [~] archive handling
-- [x] trash, recoverable delete instead of gone forever (trashy)
-- [x] usb drives auto-mount on plug in (thunar-volman + xfconf)
-- [ ] gpu fan and clock control that works on wayland (LACT is the tool, deferred to the gaming module, only worth it if performance turns out bad)
 - [~] default app per file type (md, txt, pdf, images, audio, video)
+- [ ] gpu fan and clock control that works on wayland (LACT is the tool, deferred to the gaming module, only worth it if performance turns out bad)
 - [ ] firefox settings in the repo (prefs, not just visuals), not hand-pasted into ~/.mozilla
 - [ ] configure visuals (mouse cursor, bars, etc.)
-- [ ] wire the QoL shell stack (zoxide, fzf, starship): zoxide as cd, fzf keybinds, prompt tuning
 - [ ] sway tiling functionality (how they split) + fix not being able to grab them without titlebars
-- [ ] keyboard delay / repeat rate!
 - [ ] ...
 
 extended (feature complete desktop, later tier):
