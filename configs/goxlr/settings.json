@@ -11,7 +11,7 @@
   "icons_directory": null,
   "logs_directory": null,
   "backup_directory": null,
-  "log_level": "Debug",
+  "log_level": "Off",
   "open_ui_on_launch": false,
   "activate": null,
   "firmware_source": "Live",
