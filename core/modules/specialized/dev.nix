@@ -4,5 +4,7 @@
 lib.mkIf config.host.dev {
   environment.systemPackages = with pkgs; [
     claude-code
+    tree-sitter  # nvim-treesitter (main branch) calls `tree-sitter build` at runtime
+    gcc
   ];
 }

@@ -512,6 +512,10 @@ in
         "XF86AudioMicMute"     = "exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
       };
     };
+    extraConfig = ''
+      corner_radius 8
+      shadows enable
+    '';
   };
 
   services.mako = {
@@ -655,9 +659,6 @@ in
 
   home.file."Pictures/.keep".text = ""; # creates ~/Pictures before the first save
 
-  xdg.configFile."nvim/init.lua".text =
-    ''vim.opt.clipboard = "unnamedplus"'' + "\n\n" +
-    builtins.readFile ../configs/nvim/init.lua;
 
   # usb/drive automount, read by thunar-volman
   xfconf.settings.thunar-volman = {

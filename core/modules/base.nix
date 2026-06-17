@@ -54,9 +54,11 @@ in
 
   # autologin tty1 then exec sway, no display manager.
   # launch is system level via loginShellInit, independent of the login shell.
-  programs.sway.enable = true; # swap package = pkgs.swayfx for rounded corners + shadows
-  # clear sway's default extras, we supply our own, laptop re-adds its tools
-  programs.sway.extraPackages = [ ];
+  programs.sway = {
+    enable = true;
+    package = pkgs.swayfx;
+    extraPackages = [ ]; # we supply our own, laptop re-adds its tools
+  };
   # sway's graphical-desktop base turns on speech-dispatcher, it drags in 700+ MiB of tts voices
   services.speechd.enable = false;
   services.getty.autologinUser = settings.username;
@@ -155,8 +157,6 @@ in
 
   environment.systemPackages = with pkgs; [
     neovim
-    tree-sitter  # nvim-treesitter (main branch) calls `tree-sitter build` at runtime
-    gcc
     git
     alacritty # terminal
     fuzzel # launcher

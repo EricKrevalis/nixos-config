@@ -2,6 +2,10 @@
 
 # home-side dev tooling, gated like core/modules/specialized/dev.nix.
 lib.mkIf settings.dev {
+  xdg.configFile."nvim/init.lua".text =
+    ''vim.opt.clipboard = "unnamedplus"'' + "\n\n" +
+    builtins.readFile ../../configs/nvim/init.lua;
+
   # claude-code fullscreen (alternate-screen) renderer, the declarative equivalent of /tui fullscreen
   home.sessionVariables.CLAUDE_CODE_NO_FLICKER = "1";
 
