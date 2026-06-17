@@ -8,6 +8,7 @@ let
   nvidiaEnv = lib.optionalString config.host.nvidia ''
     export GBM_BACKEND=nvidia-drm
     export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export WLR_RENDERER=gles2
   '';
   swayFlags = lib.optionalString config.host.nvidia " --unsupported-gpu";
 in

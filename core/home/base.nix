@@ -589,8 +589,8 @@ in
   xdg.configFile."waybar/config.jsonc".text = builtins.toJSON {
     layer    = "top";
     position = "top";
-    height   = 20;
-    "margin-top"   = 6;
+    height   = 16;
+    "margin-top"   = 1;
     "margin-left"  = 280;
     "margin-right" = 280;
     exclusive = false;
