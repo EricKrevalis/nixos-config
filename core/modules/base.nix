@@ -155,6 +155,8 @@ in
 
   environment.systemPackages = with pkgs; [
     neovim
+    tree-sitter  # nvim-treesitter (main branch) calls `tree-sitter build` at runtime
+    gcc
     git
     alacritty # terminal
     fuzzel # launcher

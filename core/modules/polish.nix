@@ -2,7 +2,4 @@
 
 # feature complete desktop on top of base, enabled by host.polish
 lib.mkIf config.host.polish {
-  environment.systemPackages = [
-    pkgs.tidal-hifi
-  ];
 }

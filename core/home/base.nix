@@ -4,7 +4,7 @@ let
 in
 
 {
-  imports = [ ./specialized/dev.nix ./specialized/gaming.nix ]; # each inert unless its toggle is set
+  imports = [ ./polish.nix ./specialized/dev.nix ./specialized/gaming.nix ]; # each inert unless its toggle is set
 
   home.username = settings.username;
   home.homeDirectory = "/home/${settings.username}";
