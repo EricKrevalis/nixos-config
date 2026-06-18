@@ -461,6 +461,7 @@ in
           {
             criteria.appid = "satty";
             command = "floating enable, resize set 1600 900";
+          }
           {
             # proton/xwayland windows tile by default, force them fullscreen. class is steam_app_<id>
             criteria.class = "^steam_app_[0-9]+$";
