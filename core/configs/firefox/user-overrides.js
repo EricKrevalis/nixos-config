@@ -96,6 +96,9 @@ user_pref("browser.search.region", "ES");
 // the daily usage ping arkenfox doesn't cover, separate from the healthreport it does
 user_pref("datareporting.usage.uploadEnabled", false);
 
+// nimbus feature rollouts, ff148 split this into its own data-use setting arkenfox doesn't cover
+user_pref("nimbus.rollouts.enabled", false);
+
 // uniform opt-out header, not a fingerprint, carries ccpa/gdpr weight
 user_pref("privacy.globalprivacycontrol.enabled", true);
 

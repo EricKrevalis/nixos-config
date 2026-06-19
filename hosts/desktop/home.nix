@@ -1,18 +1,5 @@
 { lib, pkgs, ... }:
 
-let
-  # both force-installed by policy, which exempts them from signature checks and skips
-  # the install prompt. ublock is hash-pinned from amo (mainstream, always there). the
-  # theme is vendored in the repo since this niche one could vanish from amo.
-  ublock = pkgs.fetchurl {
-    url = "https://addons.mozilla.org/firefox/downloads/file/4814095/ublock_origin-1.71.0.xpi";
-    sha256 = "47f788a1fc2c014830b30bb0ef9588615701b98c5265fb19b8cf4ba779849feb";
-  };
-  forestGreen = ../../configs/firefox/natural_forest_green-1.0.xpi; # amo file/3903186, v1.0
-  ublockId = "uBlock0@raymondhill.net";
-  themeId = "{054dd025-3fbd-45ab-a3d9-a22cecbbdd07}";
-in
-
 {
   # goxlr-daemon doesn't autostart on sway (xdg autostart is a gnome/kde thing)
   wayland.windowManager.sway.config.startup = [
@@ -63,77 +50,4 @@ in
     run ${pkgs.goxlr-utility}/bin/goxlr-client profiles microphone load DEFAULT || true
   '';
 
-  # firefox: my arkenfox-hardened profile. home-manager owns the package so it can write
-  # the profile's user.js and inject the policy that force-installs ublock and the theme.
-  programs.firefox = {
-    enable = true;
-    profiles.arkenfox-tinkered = {
-      isDefault = true;
-      settings = {
-        "browser.profiles.enabled" = false;   # off, ff's new profile db desyncs and flags the profile inaccessible
-        "intl.locale.requested" = "en-US";    # built-in ui locale, no langpack install prompt
-        "extensions.activeThemeID" = themeId; # apply the forest green theme
-      };
-      # arkenfox base then my overrides, the same order arkenfox's own updater uses
-      extraConfig = builtins.readFile ../../configs/firefox/user.js
-                  + builtins.readFile ../../configs/firefox/user-overrides.js;
-      # force=true lets home-manager overwrite the search db firefox rewrites each launch.
-      # hiding a builtin actually drops it, the settings ui only grays out its remove button.
-      # no aliases on my engines, i don't want urlbar search shortcuts.
-      search = {
-        force = true;
-        default = "qwant";
-        privateDefault = "qwant";
-        order = [ "qwant" "startpage" "mojeek" "ddg" "brave" ];
-        engines = {
-          startpage = {
-            name = "Startpage";
-            urls = [{ template = "https://www.startpage.com/sp/search?query={searchTerms}"; }];
-            icon = "https://www.startpage.com/favicon.ico";
-          };
-          mojeek = {
-            name = "Mojeek";
-            urls = [{ template = "https://www.mojeek.com/search?q={searchTerms}"; }];
-            icon = "https://www.mojeek.com/favicon.ico";
-          };
-          brave = {
-            name = "Brave Search";
-            urls = [{ template = "https://search.brave.com/search?q={searchTerms}"; }];
-            icon = "https://search.brave.com/favicon.ico";
-          };
-          google.metaData.hidden = true;
-          bing.metaData.hidden = true;
-          ebay.metaData.hidden = true;
-          "amazondotcom-us".metaData.hidden = true;
-          wikipedia.metaData.hidden = true;
-          ecosia.metaData.hidden = true;	# morally nice, but not privacy focused
-          qwant.metaData.hidden = false;	# privacy focused EU. ES region bound
-          perplexity.metaData.hidden = true;
-        };
-      };
-    };
-    policies = {
-      ExtensionSettings = {
-        ${ublockId} = {
-          installation_mode = "force_installed";
-          install_url = "file://${ublock}";
-        };
-        ${themeId} = {
-          installation_mode = "force_installed";
-          install_url = "file://${forestGreen}";
-        };
-      };
-      # ublock reads adminSettings from managed storage at launch and overwrites its own
-      # state, so this repo json is the single source of truth for filters and rules
-      "3rdparty".Extensions.${ublockId}.adminSettings =
-        builtins.fromJSON (builtins.readFile ../../configs/firefox/ublock-adminsettings.json);
-    };
-  };
-
-  # web links open in my firefox, overriding the engine's mullvad-browser default
-  xdg.mimeApps.defaultApplications = {
-    "text/html" = lib.mkForce "firefox.desktop";
-    "x-scheme-handler/http" = lib.mkForce "firefox.desktop";
-    "x-scheme-handler/https" = lib.mkForce "firefox.desktop";
-  };
 }

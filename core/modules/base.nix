@@ -26,6 +26,7 @@ in
   host.dev = settings.dev;
   host.gaming = settings.gaming;
   host.nvidia = settings.nvidia;
+  host.arkenfox = settings.arkenfox; # typed here, the layer itself is home-side
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

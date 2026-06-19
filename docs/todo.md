@@ -1,15 +1,20 @@
 # todo
 
---- links for research ---
-https://github.com/swaywm/sway/wiki/Useful-add-ons-for-sway
-https://github.com/Alexays/Waybar/wiki/Examples
-------
+----------
 
-- [~] screenshots: popout as floating, dont snap into tiles
+links for some sway setup:  
+https://github.com/swaywm/sway/wiki/Useful-add-ons-for-sway  
+https://github.com/Alexays/Waybar/wiki/Examples  
+
+----------
 - [~] test stack per file type (md, txt, pdf, images, audio, video)
 - [~] firefox settings in the repo (prefs, not just visuals), not hand-pasted into ~/.mozilla
+- [ ] + extensions handling
 - [ ] add to extended: calculator, calendar, image editor
-- [ ] remove nvim kickstart profile/settings from repo, unnecessary
+- [ ] Ctrl+C, Ctrl+V everywhere, including terminals (excluding vim)
+- [ ] Shift+Enter in claude code
+- [ ] Disable Primary copy entirely (left mouse button drag) and all references, same with pase (middle mouse button), only feasible to do once Ctrl+C and Ctrl+V is fully functional (AND IN CLIPHIST!)
+- [ ] images in cliphist possible?
 
 extended (feature complete desktop, later tier):
 - [ ] office suite (libreoffice), opening docx/xlsx/odt/pptx
@@ -17,7 +22,7 @@ extended (feature complete desktop, later tier):
 - [ ] calendar
 - [ ] pdf annotation and forms (zathura is read-only, okular or similar)
 - [ ] image editor (gimp or krita)
-- [ ] password manager
+- [ ] password manager: bitwarden, no browser extension. rbw + fuzzel (rofi-rbw/fuzzel-rbw), type via wtype not clipboard (cliphist captures it), argon2id kdf. vaultwarden self-host long-term. proton handles email/cloud separately
 - [ ] torrent client
 - [ ] note taking
 - [ ] file sync (syncthing or similar)
@@ -27,7 +32,7 @@ dev:
 - [ ] jupyter notebooks in neovim (jupytext + molten), needs a graphics-capable terminal for inline output
 - [ ] docker or podman
 - [ ] language toolchains as needed
-- [ ] fix claude fullscreen render in terminal
+- [ ] ultra lategame: pi harness, ponytail/caveman, maybe open LLM, huge optimizations
 
 ## hardware / system
 

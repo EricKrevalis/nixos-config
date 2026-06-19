@@ -4,7 +4,7 @@ let
 in
 
 {
-  imports = [ ./polish.nix ./specialized/dev.nix ./specialized/gaming.nix ]; # each inert unless its toggle is set
+  imports = [ ./polish.nix ./specialized/dev.nix ./specialized/gaming.nix ./specialized/arkenfox.nix ]; # each inert unless its toggle is set
 
   home.username = settings.username;
   home.homeDirectory = "/home/${settings.username}";
@@ -544,6 +544,10 @@ in
     };
   };
 
+  # firefox is the default browser on every host, vanilla unless settings.arkenfox hardens it.
+  # no policy here, so no "managed by your organization", the profile stays the user's own.
+  programs.firefox.enable = true;
+
   programs.zathura.enable = true; # mupdf backend bundled, no extra plugin
 
   programs.mpv = {
@@ -562,7 +566,7 @@ in
   };
 
   # default handler per file type: swayimg images, zathura documents, mpv media,
-  # neovim text, mullvad browser web (a host can override web to its own browser)
+  # neovim text, firefox web (a host can override web to its own browser)
   xdg.mimeApps = {
     enable = true;
     defaultApplications =
@@ -587,7 +591,7 @@ in
           "text/plain" "text/markdown" "application/json"
           "application/x-shellscript" "text/x-python" "text/x-csrc"
         ]
-        // forEach "mullvad-browser.desktop" [
+        // forEach "firefox.desktop" [
           "text/html" "x-scheme-handler/http" "x-scheme-handler/https"
         ];
   };

@@ -3,5 +3,5 @@ result
 *.env
 
 # arkenfox updater.sh scratch, git is the real history
-configs/firefox/userjs_backups/
-configs/firefox/userjs_diffs/
+core/configs/firefox/userjs_backups/
+core/configs/firefox/userjs_diffs/

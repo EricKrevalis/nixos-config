@@ -12,4 +12,6 @@
     lib.mkEnableOption "gaming layer on top of polish";
   options.host.nvidia =
     lib.mkEnableOption "the proprietary nvidia gpu stack (driver plus wlroots quirks)";
+  options.host.arkenfox =
+    lib.mkEnableOption "arkenfox-hardened firefox, requires uBlock script handling knowledge and exception management";
 }
