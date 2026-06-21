@@ -11,9 +11,13 @@ https://github.com/Alexays/Waybar/wiki/Examples
 - [~] firefox settings in the repo (prefs, not just visuals), not hand-pasted into ~/.mozilla
 - [ ] + extensions handling
 - [ ] add to extended: calculator, calendar, image editor
-- [ ] Ctrl+C, Ctrl+V everywhere, including terminals (excluding vim)
-- [ ] Shift+Enter in claude code
-- [ ] Disable Primary copy entirely (left mouse button drag) and all references, same with pase (middle mouse button), only feasible to do once Ctrl+C and Ctrl+V is fully functional (AND IN CLIPHIST!)
+- [x] copy/paste: Ctrl+C/V in gui apps (native), Ctrl+Shift+C/V in the terminal (alacritty default). no copy_or_interrupt on alacritty, so terminal stays shift-tier, that's the standard
+- [x] Shift+Enter for a newline in line-oriented prompts (alacritty sends LF on shift+enter)
+- [x] retired the primary/mouse clipboard, both copy and paste, layered:
+      - sway `primary_selection disabled` removes the wayland primary protocol wholesale, so native wayland apps neither write it on highlight nor paste it on middle-click
+      - per-toolkit for the xwayland edge (backend-agnostic): firefox clipboard.autocopy + middlemouse.paste off, gtk-enable-primary-paste off, alacritty middle=None
+      - dropped the `wl-paste --primary` cliphist watcher, highlights no longer pollute clipboard history
+      residual: a non-gtk/non-firefox xwayland app (steam search, a qt app) can still middle-paste its own X primary, no global x switch exists for that
 - [ ] images in cliphist possible?
 
 extended (feature complete desktop, later tier):

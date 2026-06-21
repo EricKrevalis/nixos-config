@@ -16,6 +16,13 @@ in
     sway.enable = true; # writes seat "*" { xcursor_theme = "..."; } into the sway config
   };
 
+  # no middle-click primary paste in gtk apps (thunar etc), rest of gtk theming stays default
+  gtk = {
+    enable = true;
+    gtk3.extraConfig.gtk-enable-primary-paste = false;
+    gtk4.extraConfig.gtk-enable-primary-paste = false;
+  };
+
   # one block per git host from settings.sshIdentities, IdentitiesOnly so the agent never offers the wrong key.
   # the identities live in flake.nix common, this stays generic.
   programs.ssh = {
@@ -399,10 +406,20 @@ in
   programs.alacritty = {
     enable = true;
     package = null; # alacritty is installed system-wide, home-manager only writes the config
-    # mono variant keeps icons single-width so columns stay aligned
-    settings.font = {
-      normal.family = "AtkynsonMono Nerd Font Mono";
-      size = 12;
+    settings = {
+      # mono variant keeps icons single-width so columns stay aligned
+      font = {
+        normal.family = "AtkynsonMono Nerd Font Mono";
+        size = 12;
+      };
+      # shift+enter: newline byte, not submit
+      keyboard.bindings = [
+        { key = "Return"; mods = "Shift"; chars = "\n"; }
+      ];
+      # no middle-click paste, the primary-selection mouse path is being retired
+      mouse.bindings = [
+        { mouse = "Middle"; action = "None"; }
+      ];
     };
   };
 
@@ -441,7 +458,6 @@ in
         # wallpaper file stays out of the repo (licensing), the glob takes any png/jpg/jpeg
         { command = ''swaybg -m fill -i "$(ls /home/${settings.username}/Pictures/wallpaper.* 2>/dev/null | head -n1)"''; }
         { command = "wl-paste --watch cliphist store"; }
-        { command = "wl-paste --primary --watch cliphist store"; }
       ];
       bars = [ ]; # waybar runs from startup, drop the default swaybar
 
@@ -502,7 +518,7 @@ in
       };
 
       keybindings = lib.mkOptionDefault {
-        "${mod}+c"             = "exec bash -c 'cliphist list | fuzzel --dmenu | cliphist decode | tee >(wl-copy --primary) | wl-copy'";
+        "${mod}+c"             = "exec bash -c 'cliphist list | fuzzel --dmenu | cliphist decode | wl-copy'";
         "Print"                = "exec grim - | satty --filename -";
         "Shift+Print"          = "exec grim -g \"$(slurp)\" - | satty --filename -";
         "XF86AudioPlay"        = "exec playerctl play-pause";
@@ -517,6 +533,7 @@ in
       };
     };
     extraConfig = ''
+      primary_selection disabled
       corner_radius 6
       shadows enable
       gaps inner 3

@@ -78,6 +78,10 @@ user_pref("browser.tabs.groups.smart.userEnabled", false);
 user_pref("browser.tabs.dragDrop.createGroup.enabled", false);
 user_pref("browser.tabs.hoverPreview.showThumbnails", false);
 
+// retire the mouse selection path: no highlight-to-primary copy, no middle-click paste
+user_pref("clipboard.autocopy", false);
+user_pref("middlemouse.paste", false);
+
 // misc ui: spellcheck off, no picture-in-picture toggle, manual performance settings
 user_pref("layout.spellcheckDefault", 0);
 user_pref("media.videocontrols.picture-in-picture.video-toggle.enabled", false);
