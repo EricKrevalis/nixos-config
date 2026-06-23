@@ -503,13 +503,28 @@ in
         commands = [
           {
             criteria.title = "popup-terminal";
-            command = "floating enable, resize set 800 500";
+            command = "floating enable, resize set 800 500, move position center";
+          }
+          {
+            # own app_id so the power menu sizes and centers independently of the shared popup terminals.
+            # app_id is set when the window maps, unlike --title which alacritty sets late and the rule then misses.
+            criteria.app_id = "powermenu";
+            # sized to fit the gum boxes (--width 36, size-18 font), hand-tuned so the content fills it and reads centered.
+            # the launchers pin font.size=18 to match, change both together.
+            command = "floating enable, resize set 576 673, move position center";
           }
           {
             criteria.app_id = "satty";
-            command = "floating enable, resize set 1600 900";
+            command = "floating enable, resize set 1600 900, move position center";
           }
+          # no dialog float rule needed. sway already auto-floats modal, transient, fixed-size and _NET_WM_WINDOW_TYPE dialog/utility/toolbar/splash windows.
         ];
+      };
+
+      # floating windows match tiled: same 3px border, no titlebar
+      floating = {
+        border = 3;
+        titlebar = false;
       };
 
       colors = {
@@ -544,6 +559,7 @@ in
       };
 
       keybindings = lib.mkOptionDefault {
+        "${mod}+Shift+e"       = "exec alacritty --class powermenu -o font.size=18 -e powermenu"; # power menu, replaces the default exit nag
         "Print"                = "exec grim - | satty --filename -";
         "Shift+Print"          = "exec grim -g \"$(slurp)\" - | satty --filename -";
         "XF86AudioPlay"        = "exec playerctl play-pause";
@@ -565,6 +581,25 @@ in
       gaps inner 3
       gaps outer 1
     '';
+  };
+
+  # screen locker. minimal forest-tinted look now, stylix takes it over later.
+  programs.swaylock = {
+    enable = true;
+    settings = {
+      color = "0f2910"; # dark green background while locked
+      indicator-radius = 90;
+      indicator-thickness = 8;
+    };
+  };
+  # lock the screen before any suspend and on loginctl lock-session (the power menu's lock action).
+  # no idle timeout, this desktop only locks on demand or before sleep.
+  services.swayidle = {
+    enable = true;
+    events = {
+      before-sleep = "${lib.getExe pkgs.swaylock} -f";
+      lock         = "${lib.getExe pkgs.swaylock} -f";
+    };
   };
 
   services.mako = {
@@ -608,10 +643,55 @@ in
     categories = [ "Utility" "TextEditor" ];
   };
 
+  # power menu in the fuzzel app list, same script as the waybar button and Mod+Shift+e
+  xdg.desktopEntries.power-menu = {
+    name = "Power";
+    exec = "alacritty --class powermenu -o font.size=18 -e powermenu";
+    terminal = false;
+    icon = "system-shutdown";
+    categories = [ "System" ];
+  };
+
   # loop-mount an iso read-only via udisks (polkit, no sudo), then open it.
   # eject in thunar to unmount, udisks auto-clears the loop.
   home.packages = [
     pkgs.papirus-icon-theme # the base theme the computer-icon overlay inherits from
+    # power menu, run in a floating terminal from Mod+Shift+e, the waybar button and the fuzzel entry.
+    # each action is a bordered gum box, gum choose navigates box to box (arrows or j/k), enter picks, esc backs out.
+    # the active box is recolored, not prefixed. no logout, autologin has nowhere to return to.
+    (
+      let
+        # the four boxes are static, so render them once at build time, not per keypress.
+        # rendering at keypress added four gum cold starts on the hot path, ~0.1s of lag before the menu drew.
+        # box is 38 cols wide (--width 36 plus borders), 5 rows tall, the sway rule sizes the window to fit.
+        boxes = pkgs.runCommand "powermenu-boxes" { nativeBuildInputs = [ pkgs.gum ]; } ''
+          mkdir -p "$out"
+          for label in Lock Suspend Reboot Shutdown; do
+            gum style --border double --padding "1 3" --width 36 --align center "$label" > "$out/$label"
+          done
+        '';
+      in
+      pkgs.writeShellApplication {
+        name = "powermenu";
+        runtimeInputs = with pkgs; [ gum systemd ];
+        text = ''
+          # $(<file) is a bash builtin, no subprocess, so gum choose is the only program launched here.
+          Lock=$(<${boxes}/Lock)
+          Suspend=$(<${boxes}/Suspend)
+          Reboot=$(<${boxes}/Reboot)
+          Shutdown=$(<${boxes}/Shutdown)
+          choice=$(gum choose --cursor "" --header "" \
+            --cursor.foreground "#d4783a" --item.foreground "#9a8f80" \
+            "$Lock" "$Suspend" "$Reboot" "$Shutdown") || exit 0
+          case "$choice" in
+            *Lock*)     loginctl lock-session ;;
+            *Suspend*)  systemctl suspend ;;
+            *Reboot*)   systemctl reboot ;;
+            *Shutdown*) systemctl poweroff ;;
+          esac
+        '';
+      }
+    )
     (pkgs.writeShellApplication {
       name = "iso-mount";
       runtimeInputs = with pkgs; [ udisks2 gnugrep gnused xdg-utils ];
@@ -702,9 +782,15 @@ in
     exclusive = false;
     spacing   = 0;
 
-    "modules-left"   = [ "clock" ];
+    "modules-left"   = [ "custom/power" "clock" ];
     "modules-center" = [ "sway/workspaces" ];
     "modules-right"  = [ "tray" "group/connectivity" ];
+
+    "custom/power" = {
+      format     = "󰐥";
+      tooltip    = false;
+      "on-click" = "alacritty --class powermenu -o font.size=18 -e powermenu";
+    };
 
     "sway/workspaces" = {
       format             = "●";
@@ -763,7 +849,19 @@ in
     corner-roundness = 1
     '';
 
-  home.file."Pictures/.keep".text = ""; # creates ~/Pictures before the first save
+  # createDirectories makes these at activation, ~/Pictures included for the wallpaper and screenshots
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+    desktop = null;     # no desktop icon renderer on sway
+    publicShare = null; # nothing serves it without a share daemon
+    download = "$HOME/Downloads";
+    documents = "$HOME/Documents";
+    music = "$HOME/Music";
+    pictures = "$HOME/Pictures";
+    videos = "$HOME/Videos";
+    templates = "$HOME/Templates"; # thunar's create-document menu reads this
+  };
 
 
   # usb/drive automount, read by thunar-volman

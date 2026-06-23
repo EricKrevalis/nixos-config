@@ -8,9 +8,14 @@ refs: https://github.com/swaywm/sway/wiki/Useful-add-ons-for-sway
       https://github.com/Alexays/Waybar/wiki/Examples
 
 ## TODO:
-- [!] plan out next todo steps
+- [!] stylix, one base16 palette drives every app, override waybar + sway to keep the hand-tuned look, polish, see docs/colors.md
 
 ## testing / work-in-progress:
+- [?] power menu (gum tui in a floating term), Mod+Shift+e + waybar button + fuzzel entry, verify lock/reboot/shutdown fire
+- [?] float dialogs, for_window on dialog role/type, verify x/xwayland dialogs float
+- [?] screen lock (swaylock + swayidle), verify unlock and lock-before-sleep
+- [?] xdg-user-dirs, verify the dirs recreate on build
+- [?] nvidia suspend/resume clean with powerManagement on, test under real load
 
 ## base-layer:
 
@@ -77,10 +82,7 @@ cleanup nix doesn't handle on its own.
 
 tagged brainstorm pool, layer-value prefix. question each before pulling into a section.
 
-- [ ] base-high: screen lock + idle (swayidle + swaylock), lock on idle and before suspend (gap, have neither)
-- [ ] base-high: xdg-user-dirs, auto-create ~/Downloads, ~/Documents, ~/Pictures etc.
-- [ ] base-med: logout/power menu (wlogout or a fuzzel script)
-- [ ] base-med: per-app window rules (float dialogs, workspace assigns, scratchpad terminal)
+- [ ] base-med: per-app window rules (workspace assigns, scratchpad terminal)
 - [ ] base-med: window resize/move binds and a dedicated mode
 - [ ] base-med: ffmpegthumbnailer for video thumbnails in thunar
 - [ ] base-med: pdf/poppler tumbler thumbnailers

@@ -20,7 +20,7 @@ lib.mkIf config.host.nvidia {
     open = true; # see header for the closed-module fallback
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable; # stable branch
-    powerManagement.enable = false; # enable if suspend/resume corrupts the display
+    powerManagement.enable = true; # PROVISIONAL: saves/restores vram so suspend resumes clean, test resume under real load
   };
 
   # btop finds the gpu only via libnvidia-ml, kept off the linker path on nixos

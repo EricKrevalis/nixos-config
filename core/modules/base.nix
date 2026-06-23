@@ -70,6 +70,9 @@
   # graphical polkit agent for gui apps needing elevation, cli falls back to pkttyagent
   security.soteria.enable = true;
 
+  # lets swaylock verify the password and unlock, without it the session is a one-way trap
+  security.pam.services.swaylock = { };
+
   xdg.portal = {
     enable = true;
     wlr.enable = true;
