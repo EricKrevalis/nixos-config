@@ -49,7 +49,9 @@
   programs.sway = {
     enable = true;
     package = pkgs.swayfx;
-    extraPackages = [ ]; # we supply our own, laptop re-adds its tools
+    # [] keeps sway's default bundle out (pulseaudio, wmenu, foot, swaylock, swayidle, grim).
+    # the ones kept are installed via their own modules so they carry config, wmenu is dropped for fuzzel.
+    extraPackages = [ ];
   };
   # sway's graphical-desktop base turns on speech-dispatcher, it drags in 700+ MiB of tts voices
   services.speechd.enable = false;
@@ -90,6 +92,8 @@
       chooser_cmd = "${pkgs.slurp}/bin/slurp -f 'Monitor: %o' -or";
     };
   };
+
+  services.fwupd.enable = false; # enable to flash device firmware via lvfs then set false again, the flash persists on the device
 
   services.udisks2.enable = true; # drive mounting backend, needed for USB automount and udisksctl
 
@@ -154,7 +158,6 @@
   environment.systemPackages = with pkgs; [
     neovim
     git
-    alacritty # terminal
     fuzzel # launcher
     bluetui # bluetooth tui
     wiremix # audio tui

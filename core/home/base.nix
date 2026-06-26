@@ -45,7 +45,7 @@ in
     sway.enable = true; # writes seat "*" { xcursor_theme = "..."; } into the sway config
   };
 
-  # enabling gtk hands home-manager the settings.ini, so any pref we want has to be set here.
+  # enabling gtk hands home-manager the settings.ini, so every pref has to be set here.
   # prefer-dark keeps thunar etc dark (was inherited from the old plasma gtk config), primary-paste off kills middle-click paste.
   gtk = {
     enable = true;
@@ -114,365 +114,62 @@ in
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
-    settings = {
-      add_newline = false;    # no blank line between prompts, keeps it compact
-      command_timeout = 1000; # ms before a slow module is skipped, avoids prompt stalls
-      # » arrow, forest green on success and burnt orange when the last command failed
-      character = {
-        success_symbol = "[»](#346b30)";
-        error_symbol = "[»](#bc4e20)";
+    # the nerd-font-symbols preset is the bulk of the config, kept as data in configs/starship.
+    # refresh it after a starship upgrade: starship preset nerd-font-symbols > that file.
+    # the tweaks below override it, recursiveUpdate's second arg wins on conflict.
+    settings = lib.recursiveUpdate
+      (builtins.fromTOML (builtins.readFile ../configs/starship/nerd-font-symbols.toml))
+      {
+        add_newline = false;    # no blank line between prompts, keeps it compact
+        command_timeout = 1000; # ms before a slow module is skipped, avoids prompt stalls
+        # » arrow, forest green on success and burnt orange when the last command failed
+        character = {
+          success_symbol = "[»](#346b30)";
+          error_symbol = "[»](#bc4e20)";
+        };
       };
-      # nerd-font-symbols preset (starship preset nerd-font-symbols)
-      aws = {
-        symbol = " ";
-      };
-      azure = {
-        symbol = " ";
-      };
-      battery = {
-        full_symbol = "󰁹 ";
-        charging_symbol = "󰂄 ";
-        discharging_symbol = "󰂃 ";
-        unknown_symbol = "󰂑 ";
-        empty_symbol = "󰂎 ";
-      };
-      buf = {
-        symbol = " ";
-      };
-      bun = {
-        symbol = " ";
-      };
-      c = {
-        symbol = " ";
-      };
-      cpp = {
-        symbol = " ";
-      };
-      cmake = {
-        symbol = " ";
-      };
-      cobol = {
-        symbol = " ";
-      };
-      conda = {
-        symbol = " ";
-      };
-      container = {
-        symbol = " ";
-      };
-      crystal = {
-        symbol = " ";
-      };
-      dart = {
-        symbol = " ";
-      };
-      deno = {
-        symbol = " ";
-      };
-      direnv = {
-        symbol = " ";
-      };
-      directory = {
-        read_only = " 󰌾";
-      };
-      docker_context = {
-        symbol = " ";
-      };
-      dotnet = {
-        symbol = " ";
-      };
-      elixir = {
-        symbol = " ";
-      };
-      elm = {
-        symbol = " ";
-      };
-      erlang = {
-        symbol = " ";
-      };
-      fennel = {
-        symbol = " ";
-      };
-      fortran = {
-        symbol = " ";
-      };
-      fossil_branch = {
-        symbol = " ";
-      };
-      gcloud = {
-        symbol = "󱇶 ";
-      };
-      gleam = {
-        symbol = " ";
-      };
-      git_branch = {
-        symbol = " ";
-      };
-      git_commit = {
-        tag_symbol = "  ";
-      };
-      golang = {
-        symbol = " ";
-      };
-      gradle = {
-        symbol = " ";
-      };
-      guix_shell = {
-        symbol = " ";
-      };
-      haskell = {
-        symbol = " ";
-      };
-      haxe = {
-        symbol = " ";
-      };
-      helm = {
-        symbol = " ";
-      };
-      hg_branch = {
-        symbol = " ";
-      };
-      hostname = {
-        ssh_symbol = " ";
-      };
-      java = {
-        symbol = " ";
-      };
-      julia = {
-        symbol = " ";
-      };
-      kotlin = {
-        symbol = " ";
-      };
-      kubernetes = {
-        symbol = "󱃾 ";
-      };
-      lua = {
-        symbol = " ";
-      };
-      maven = {
-        symbol = " ";
-      };
-      memory_usage = {
-        symbol = "󰍛 ";
-      };
-      meson = {
-        symbol = "󰔷 ";
-      };
-      mojo = {
-        symbol = "󰈸 ";
-      };
-      nats = {
-        symbol = " ";
-      };
-      netns = {
-        symbol = "󰛳 ";
-      };
-      nim = {
-        symbol = " ";
-      };
-      nix_shell = {
-        symbol = " ";
-      };
-      nodejs = {
-        symbol = " ";
-      };
-      ocaml = {
-        symbol = " ";
-      };
-      odin = {
-        symbol = "󰟢 ";
-      };
-      opa = {
-        symbol = " ";
-      };
-      openstack = {
-        symbol = " ";
-      };
-      os.symbols = {
-        AIX = " ";
-        AlmaLinux = " ";
-        Alpaquita = " ";
-        Alpine = " ";
-        ALTLinux = " ";
-        Amazon = " ";
-        Android = " ";
-        AOSC = " ";
-        Arch = " ";
-        Artix = " ";
-        Bluefin = " ";
-        CachyOS = " ";
-        CentOS = " ";
-        Debian = " ";
-        DragonFly = " ";
-        Elementary = " ";
-        Emscripten = " ";
-        EndeavourOS = " ";
-        Fedora = " ";
-        FreeBSD = " ";
-        Garuda = " ";
-        Gentoo = " ";
-        HardenedBSD = "󰞌 ";
-        Illumos = " ";
-        InstantOS = " ";
-        Ios = "󰀷 ";
-        Kali = " ";
-        Linux = " ";
-        Mabox = " ";
-        Macos = " ";
-        Manjaro = " ";
-        Mariner = " ";
-        MidnightBSD = " ";
-        Mint = " ";
-        NetBSD = " ";
-        NixOS = " ";
-        Nobara = " ";
-        OpenBSD = " ";
-        OpenCloudOS = " ";
-        openEuler = " ";
-        openSUSE = " ";
-        OracleLinux = "󰺡 ";
-        PikaOS = " ";
-        Pop = " ";
-        Raspbian = " ";
-        Redhat = "󱄛 ";
-        RedHatEnterprise = "󱄛 ";
-        Redox = "󰀘 ";
-        RockyLinux = " ";
-        Solus = " ";
-        SUSE = " ";
-        Ubuntu = " ";
-        Ultramarine = " ";
-        Unknown = " ";
-        Uos = " ";
-        Void = " ";
-        Windows = "󰍲 ";
-        Zorin = " ";
-      };
-      package = {
-        symbol = "󰏗 ";
-      };
-      perl = {
-        symbol = " ";
-      };
-      php = {
-        symbol = " ";
-      };
-      pijul_channel = {
-        symbol = " ";
-      };
-      pixi = {
-        symbol = "󰏗 ";
-      };
-      pulumi = {
-        symbol = " ";
-      };
-      purescript = {
-        symbol = " ";
-      };
-      python = {
-        symbol = " ";
-      };
-      raku = {
-        symbol = "󱖊 ";
-      };
-      red = {
-        symbol = "󱍼 ";
-      };
-      rlang = {
-        symbol = "󰟔 ";
-      };
-      ruby = {
-        symbol = " ";
-      };
-      rust = {
-        symbol = "󱘗 ";
-      };
-      scala = {
-        symbol = " ";
-      };
-      shlvl = {
-        symbol = "󰹍 ";
-      };
-      singularity = {
-        symbol = " ";
-      };
-      solidity = {
-        symbol = " ";
-      };
-      spack = {
-        symbol = " ";
-      };
-      status = {
-        symbol = " ";
-      };
-      sudo = {
-        symbol = " ";
-      };
-      swift = {
-        symbol = " ";
-      };
-      terraform = {
-        symbol = " ";
-      };
-      vlang = {
-        symbol = " ";
-      };
-      typst = {
-        symbol = " ";
-      };
-      vagrant = {
-        symbol = " ";
-      };
-      xmake = {
-        symbol = " ";
-      };
-      zig = {
-        symbol = " ";
-      };
-    };
   };
   programs.zoxide = {
     enable = true;
     enableZshIntegration = false; # init by hand in initContent, must run after starship
   };
-  programs.alacritty = {
+  # the HM foot module ships its own package, so foot comes from here, not systemPackages.
+  # server mode left off, enable it later if terminal startup ever feels slow.
+  programs.foot = {
     enable = true;
-    package = null; # alacritty is installed system-wide, home-manager only writes the config
     settings = {
-      # mono variant keeps icons single-width so columns stay aligned
-      font = {
-        normal.family = "AtkynsonMono Nerd Font Mono";
-        size = 12;
+      main = {
+        # mono variant keeps icons single-width so columns stay aligned
+        font = "AtkynsonMono Nerd Font Mono:size=12";
+        # colors left unset, foot's defaults stand in until stylix owns the palette
+        # don't auto-copy a selection anywhere (default is primary), the primary-selection path is retired.
+        selection-target = "none";
       };
-      # shift+enter: newline byte, not submit
-      keyboard.bindings = [
-        { key = "Return"; mods = "Shift"; chars = "\n"; }
-      ];
-      # no middle-click paste, the primary-selection mouse path is being retired
-      mouse.bindings = [
-        { mouse = "Middle"; action = "None"; }
-      ];
+      # shift+enter emits a newline byte (0x0a) instead of submitting, plain enter still sends CR
+      text-bindings."\\x0a" = "Shift+Return";
+      # no middle-click paste either, the primary-selection mouse path is retired
+      mouse-bindings.primary-paste = "none";
     };
   };
 
   programs.fuzzel = {
     enable = true;
     package = null; # fuzzel is installed system-wide, home-manager only writes the config
-    # fuzzel runs Terminal=true apps in xterm by default, we don't install xterm
-    settings.main.terminal = "alacritty -e";
+    # fuzzel runs Terminal=true apps in xterm by default, xterm isn't installed here.
+    # foot takes the command as trailing args, so no -e, just "foot".
+    settings.main.terminal = "foot";
   };
 
-  # exo has no built-in helper for alacritty, so thunar's "open terminal here" errors out
-  xdg.dataFile."xfce4/helpers/alacritty.desktop".text = ''
+  # exo has no built-in helper for foot, so thunar's "open terminal here" errors out
+  xdg.dataFile."xfce4/helpers/foot.desktop".text = ''
     [Desktop Entry]
     Type=X-XFCE-Helper
     X-XFCE-Category=TerminalEmulator
-    Name=Alacritty
-    X-XFCE-Commands=alacritty
-    X-XFCE-CommandsWithParameter=alacritty -e %s
+    Name=Foot
+    X-XFCE-Commands=foot
+    X-XFCE-CommandsWithParameter=foot %s
   '';
-  xdg.configFile."xfce4/helpers.rc".text = "TerminalEmulator=alacritty\n";
+  xdg.configFile."xfce4/helpers.rc".text = "TerminalEmulator=foot\n";
 
   # sway base. per-host monitor layout lives in hosts/<host>/home.nix.
   # the session launch is system-level (core/modules/base.nix), not here.
@@ -481,7 +178,7 @@ in
     package = null; # use the system sway from programs.sway.enable
     config = {
       modifier = mod;
-      terminal = "alacritty";
+      terminal = "foot";
       menu = "fuzzel"; # Super+D launcher (native wayland, no xwayland)
       startup = [
         # import session vars so user services (polkit agents, etc.) see the wayland socket and session id
@@ -502,16 +199,9 @@ in
         titlebar = false;
         commands = [
           {
-            criteria.title = "popup-terminal";
+            # foot sets app_id at map time and it never changes, so match on it not title.
+            criteria.app_id = "popup-terminal";
             command = "floating enable, resize set 800 500, move position center";
-          }
-          {
-            # own app_id so the power menu sizes and centers independently of the shared popup terminals.
-            # app_id is set when the window maps, unlike --title which alacritty sets late and the rule then misses.
-            criteria.app_id = "powermenu";
-            # sized to fit the gum boxes (--width 36, size-18 font), hand-tuned so the content fills it and reads centered.
-            # the launchers pin font.size=18 to match, change both together.
-            command = "floating enable, resize set 576 673, move position center";
           }
           {
             criteria.app_id = "satty";
@@ -559,7 +249,7 @@ in
       };
 
       keybindings = lib.mkOptionDefault {
-        "${mod}+Shift+e"       = "exec alacritty --class powermenu -o font.size=18 -e powermenu"; # power menu, replaces the default exit nag
+        "${mod}+Shift+e"       = "exec powermenu"; # power menu, replaces the default exit nag
         "Print"                = "exec grim - | satty --filename -";
         "Shift+Print"          = "exec grim -g \"$(slurp)\" - | satty --filename -";
         "XF86AudioPlay"        = "exec playerctl play-pause";
@@ -633,11 +323,11 @@ in
     config.hwdec = "auto-safe"; # host gpu decoder when safe (nvdec here), else software
   };
 
-  # call alacritty directly, the packaged nvim.desktop wants a default terminal
+  # call foot directly, the packaged nvim.desktop wants a default terminal
   xdg.desktopEntries.nvim = {
     name = "Neovim";
     genericName = "Text Editor";
-    exec = "alacritty -e nvim %F";
+    exec = "foot nvim %F";
     terminal = false;
     mimeType = [ "text/plain" ];
     categories = [ "Utility" "TextEditor" ];
@@ -646,7 +336,7 @@ in
   # power menu in the fuzzel app list, same script as the waybar button and Mod+Shift+e
   xdg.desktopEntries.power-menu = {
     name = "Power";
-    exec = "alacritty --class powermenu -o font.size=18 -e powermenu";
+    exec = "powermenu";
     terminal = false;
     icon = "system-shutdown";
     categories = [ "System" ];
@@ -656,33 +346,56 @@ in
   # eject in thunar to unmount, udisks auto-clears the loop.
   home.packages = [
     pkgs.papirus-icon-theme # the base theme the computer-icon overlay inherits from
-    # power menu, run in a floating terminal from Mod+Shift+e, the waybar button and the fuzzel entry.
-    # each action is a bordered gum box, gum choose navigates box to box (arrows or j/k), enter picks, esc backs out.
-    # the active box is recolored, not prefixed. no logout, autologin has nowhere to return to.
+    # power menu, launched from Mod+Shift+e, the waybar button and the fuzzel entry.
+    # fuzzel --dmenu draws the four actions, its own config so the main launcher is untouched.
+    # no logout entry, autologin has nowhere to return to.
+    # an overlay not a window, so no sway float rule needed.
     (
       let
-        # the four boxes are static, so render them once at build time, not per keypress.
-        # rendering at keypress added four gum cold starts on the hot path, ~0.1s of lag before the menu drew.
-        # box is 38 cols wide (--width 36 plus borders), 5 rows tall, the sway rule sizes the window to fit.
-        boxes = pkgs.runCommand "powermenu-boxes" { nativeBuildInputs = [ pkgs.gum ]; } ''
-          mkdir -p "$out"
-          for label in Lock Suspend Reboot Shutdown; do
-            gum style --border double --padding "1 3" --width 36 --align center "$label" > "$out/$label"
-          done
+        menuConfig = pkgs.writeText "fuzzel-powermenu.ini" ''
+          [main]
+          font=AtkynsonMono Nerd Font Mono:size=22
+          hide-prompt=yes
+          # without this, focus_follows_mouse makes the menu vanish the moment the pointer leaves it
+          exit-on-keyboard-focus-loss=no
+          lines=4
+          width=16
+          horizontal-pad=60
+          vertical-pad=30
+          inner-pad=14
+          line-height=68
+
+          [border]
+          width=3
+          radius=6
+
+          [key-bindings]
+          # testing j/k navigation here, scoped to this config so the launcher keeps them as plain input
+          prev=Up k
+          next=Down j
+          # soak letters into a no-op so a stray key can't filter the hidden list
+          cursor-home=a b c d e f g h i l m n o p q r s t u v w x y z space comma period slash semicolon apostrophe bracketleft bracketright backslash
+
+          [colors]
+          background=2a1c0ef2
+          text=9a8f80ff
+          match=d4783aff
+          selection=6a5535ff
+          selection-text=ffffffff
+          selection-match=d4783aff
+          border=6a5535ff
         '';
       in
       pkgs.writeShellApplication {
         name = "powermenu";
-        runtimeInputs = with pkgs; [ gum systemd ];
+        runtimeInputs = with pkgs; [ fuzzel systemd ];
         text = ''
-          # $(<file) is a bash builtin, no subprocess, so gum choose is the only program launched here.
-          Lock=$(<${boxes}/Lock)
-          Suspend=$(<${boxes}/Suspend)
-          Reboot=$(<${boxes}/Reboot)
-          Shutdown=$(<${boxes}/Shutdown)
-          choice=$(gum choose --cursor "" --header "" \
-            --cursor.foreground "#d4783a" --item.foreground "#9a8f80" \
-            "$Lock" "$Suspend" "$Reboot" "$Shutdown") || exit 0
+          choice=$(printf '%s\n' \
+            "󰌾    Lock" \
+            "󰒲    Suspend" \
+            "󰜉    Reboot" \
+            "󰐥    Shutdown" \
+            | fuzzel --dmenu --config=${menuConfig}) || exit 0
           case "$choice" in
             *Lock*)     loginctl lock-session ;;
             *Suspend*)  systemctl suspend ;;
@@ -765,7 +478,7 @@ in
           # folders to thunar, else zathura's comicbook plugin claims inode/directory
           "inode/directory" = "thunar.desktop";
           # terminal for gui-launched Terminal=true apps (nvim), unset by default
-          "x-scheme-handler/terminal" = "Alacritty.desktop";
+          "x-scheme-handler/terminal" = "foot.desktop";
           # double-click an iso to loop-mount it, see the iso-mount handler above
           "application/x-cd-image" = "iso-mount.desktop";
           "application/x-iso9660-image" = "iso-mount.desktop";
@@ -789,7 +502,7 @@ in
     "custom/power" = {
       format     = "󰐥";
       tooltip    = false;
-      "on-click" = "alacritty --class powermenu -o font.size=18 -e powermenu";
+      "on-click" = "powermenu";
     };
 
     "sway/workspaces" = {
@@ -812,7 +525,7 @@ in
       format         = "{volume}% {icon}";
       "format-muted" = "mute 󰝟";
       "format-icons" = { default = [ "󰕿" "󰖀" "󰕾" ]; };
-      "on-click"     = "alacritty --title popup-terminal -e wiremix";
+      "on-click"     = "foot --app-id=popup-terminal wiremix";
     };
 
     bluetooth = {
@@ -820,7 +533,7 @@ in
       "format-connected"         = "󰂱 {device_alias}";
       "format-connected-battery" = "󰂱 {device_alias} {device_battery_percentage}%";
       tooltip    = false;
-      "on-click" = "alacritty --title popup-terminal -e bluetui";
+      "on-click" = "foot --app-id=popup-terminal bluetui";
     };
 
     network = {
@@ -828,7 +541,7 @@ in
       "format-ethernet"    = "󰈀";
       "format-disconnected" = "󰤭";
       tooltip    = false;
-      "on-click" = "alacritty --title popup-terminal -e nmtui";
+      "on-click" = "foot --app-id=popup-terminal nmtui";
     };
 
     clock = {

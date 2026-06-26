@@ -19,7 +19,9 @@ lib.mkIf config.host.nvidia {
     modesetting.enable = true; # required for wayland, enables explicit sync path
     open = true; # see header for the closed-module fallback
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable; # stable branch
+    #package = config.boot.kernelPackages.nvidiaPackages.stable; # stable branch
+    package = config.boot.kernelPackages.nvidiaPackages.latest; # 610, adds dmabuf mmap on discrete gpus, swap in to test the firefox flicker
+
     powerManagement.enable = true; # PROVISIONAL: saves/restores vram so suspend resumes clean, test resume under real load
   };
 

@@ -8,10 +8,12 @@ refs: https://github.com/swaywm/sway/wiki/Useful-add-ons-for-sway
       https://github.com/Alexays/Waybar/wiki/Examples
 
 ## TODO:
-- [!] stylix, one base16 palette drives every app, override waybar + sway to keep the hand-tuned look, polish, see docs/colors.md
+- [ ] stylix, parked for now. one base16 palette drives every app, override waybar + sway to keep the hand-tuned look, see docs/colors.md
+- [!] dev layer buildout, the editor and toolchains for real productivity, tasks in the dev section.
 
 ## testing / work-in-progress:
-- [?] power menu (gum tui in a floating term), Mod+Shift+e + waybar button + fuzzel entry, verify lock/reboot/shutdown fire
+- [?] power menu (fuzzel --dmenu, own config), Mod+Shift+e + waybar button + fuzzel entry, verify lock/suspend/reboot/shutdown fire
+- [?] terminal foot (replaced alacritty), verify shift+enter newline in claude, popups float, "open terminal here", no middle-click paste, scrollback search (Ctrl+Shift+R)
 - [?] float dialogs, for_window on dialog role/type, verify x/xwayland dialogs float
 - [?] screen lock (swaylock + swayidle), verify unlock and lock-before-sleep
 - [?] xdg-user-dirs, verify the dirs recreate on build
@@ -68,7 +70,7 @@ cleanup nix doesn't handle on its own.
 ## home-manager:
 
 - [ ] neovim config
-- [ ] remaining ssh work (tunnel/jump hosts, per secrets.md)
+- [ ] remaining ssh work (tunnel/jump hosts, per secrets.md). remote resilience: tmux for session persistence, mosh on top only for flaky/roaming links (needs a udp port open), pair mosh with tmux not zellij.
 
 ## secrets:
 
