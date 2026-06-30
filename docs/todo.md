@@ -12,13 +12,7 @@ refs: https://github.com/swaywm/sway/wiki/Useful-add-ons-for-sway
 - [!] dev layer buildout, the editor and toolchains for real productivity, tasks in the dev section.
 
 ## testing / work-in-progress:
-
-nvim dev stack, mostly checked and fine, confirm the rest next session:
-- [?] lsp attaches for lua, nix, bash, markdown (python verified)
-- [?] blink completion: passive popup, Ctrl-y accepts, enter stays a newline, self. lists lsp items
-- [?] conform <leader>cf formats nix/lua/python/bash (after nrs pulls the formatter binaries)
-- [?] lualine statusline appears after restart
-- [?] <leader>e diagnostic float, and treesitter folds (zM zR za)
+- [?] cfgs/keybinds in current stack (py, sh, lua, md / nvim / sway / plugins)
 
 ## base-layer:
 
@@ -162,6 +156,15 @@ tagged brainstorm pool, layer-value prefix. question each before pulling into a 
 
 ## done:
 
+- [x] lsp root_dir falls back to the file's dir, servers attach on loose files not just git repos
+- [x] oil q quits back to the previous buffer
+- [x] telescope pickers, oil, window splits/buffers, system clipboard both ways, persistent undo verified
+- [x] lsp attaches for lua, nix, bash, markdown (python verified)
+- [x] blink completion: passive popup, Ctrl-y accepts, enter stays a newline, self. lists lsp items
+- [x] conform <leader>cf formats nix/lua/python/bash (after nrs pulls the formatter binaries)
+- [x] lualine statusline appears after restart
+- [x] <leader>e diagnostic float, and treesitter folds (zM zR za)
+- [x] custom autotiler (core/configs/autotile) replaces autotiling-rs, splits from live window geometry not just on focus. resize fires no ipc event, self-corrects on next focus/move
 - [x] power menu (fuzzel --dmenu, own config), fires lock/suspend/reboot/shutdown from Mod+Shift+e, the waybar button and the fuzzel entry
 - [x] foot replaced alacritty: shift+enter newline in claude, popups float, "open terminal here", no middle-click paste, Ctrl+Shift+R scrollback search
 - [x] float dialogs via sway's built-in auto-float, no explicit for_window rule needed

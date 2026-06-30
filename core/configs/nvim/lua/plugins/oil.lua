@@ -8,6 +8,9 @@ return {
     view_options = {
       show_hidden = true, -- show dotfiles
     },
+    keymaps = {
+      ["q"] = "actions.close", -- quit oil back to the previous buffer
+    },
   },
   keys = {
     { "-", "<cmd>Oil<cr>", desc = "open parent dir (oil)" },
