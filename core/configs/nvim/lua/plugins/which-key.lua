@@ -1,5 +1,4 @@
 -- popup that lists the keys that can follow a prefix, read from the desc on each keymap.
--- turns the leader key into a discoverable menu instead of something to memorize.
 
 -- float the custom split keymaps to the top of the crowded <C-w> menu, ordered v, b, s, n,
 -- plain keys before their ctrl-held forms.

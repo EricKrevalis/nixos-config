@@ -3,7 +3,7 @@
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
-  dependencies = { "saghen/blink.cmp" }, -- load blink first so we can hand its capabilities to the servers
+  dependencies = { "saghen/blink.cmp" }, -- load blink first to hand its capabilities to the servers
   config = function()
     -- every server's root markers, specific first, .git the last resort.
     local root_markers = {

@@ -30,7 +30,7 @@ lib.mkIf settings.gaming {
       width = 150;
       alpha = 0.35;
       background_alpha = 0.25;
-      fps_sampling_period = 500; #default, but changes CPU draw
+      fps_sampling_period = 500; # default, but changes CPU draw
       toggle_hud = "Shift_R+F12";
     };
   };

@@ -19,7 +19,7 @@ lib.mkIf settings.dev {
     "${pkgs.symlinkJoin {
       name = "nvim-treesitter-grammars";
       paths = with pkgs.vimPlugins.nvim-treesitter.grammarPlugins; [
-        # languages we edit
+        # edited languages
         nix
         lua
         bash

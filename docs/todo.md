@@ -94,65 +94,54 @@ cleanup nix doesn't handle on its own.
 
 ## ideas:
 
-tagged brainstorm pool, layer-value prefix. question each before pulling into a section.
+not committed. pull one up into a section above when it's worth doing.
 
-- [ ] base-med: per-app window rules (workspace assigns, scratchpad terminal)
-- [ ] base-med: window resize/move binds and a dedicated mode
-- [ ] base-med: ffmpegthumbnailer for video thumbnails in thunar
-- [ ] base-med: pdf/poppler tumbler thumbnailers
-- [ ] base-med: gtk theme + icon + cursor via gtk.* in home-manager, consistent look across apps, mismatched now
-- [ ] base-med: qt theming to match gtk (qt.enable, platform theme, QT_QPA_PLATFORM=wayland)
-- [ ] base-med: kanshi output hotplug profiles, auto-apply layout on connect/disconnect (laptop win)
-- [ ] base-med: eza (ls replacement, colors/icons/git, tree mode)
-- [ ] base-med: ripgrep (fast gitignore-aware grep, also a telescope backend)
-- [ ] base-med: jq (json processor, box currently lacks it)
-- [ ] base-med: nh (nicer rebuild/gc wrapper with diff + tree, could replace nrs/nrb)
-- [ ] base-med: nix-output-monitor (nom), live build tree, pairs with nh
-- [ ] base-med: nixfmt or alejandra, a nix formatter, pick one
-- [ ] base-low: on-screen volume/brightness osd (only the wiremix tui now)
-- [ ] base-low: smart borders, gaps polish if i want the look
-- [ ] base-low: wdisplays gui for quick monitor tweaks
-- [ ] base-low: tealdeer (tldr client, fast per-command examples)
-- [ ] base-low: caps lock remap (escape or ctrl), other keyd-style remaps beyond the wooting
-- [ ] base-low: pointer settings (accel profile, scroll speed, natural scroll)
-- [ ] base-low: keybind cheatsheet / help overlay for sway
-- [ ] base-low: cliphist clear-on-boot or a size limit
-- [ ] base-low: quick clipboard-only screenshot grab, separate from the satty flow
-- [ ] base-low: do-not-disturb toggle for mako during games or calls
-- [ ] base-low: swaybg per-monitor wallpapers, or rotation
-- [ ] base-low: font rendering knobs (hinting, subpixel, fontconfig)
-- [ ] base-low: force dark mode across gtk apps, or auto dark/light
-- [ ] base-low: emoji/unicode picker on a keybind
-- [ ] base-low: alacritty scrollback size + pager keybind
-- [ ] base-low: scratch note / quick-capture keybind
-- [ ] polish-med: screen recording (wf-recorder or obs, obs pairs with the mic interface)
-- [ ] dev-low: yazi (fast keyboard-driven tui file manager)
-- [ ] dev-low: atuin (sqlite shell history, timestamps/exit/dir, changes up-arrow, decide deliberately)
-- [ ] dev-low: dust (visual du) + duf (pretty df)
-- [ ] dev-low: sd (intuitive find-replace), yq (jq for yaml/toml), glow (render markdown in terminal)
-- [ ] dev-low: comma, run any nixpkgs program without installing
-- [ ] dev-low: nix-tree, explore closure sizes for bloat cutting
-- [ ] dev-low: nix-index
-- [ ] dev-low: tmux or zellij multiplexer
-- [ ] dev-low: git commit signing + a global gitignore
-- [ ] system-high: services.fstrim.enable for ssd health
-- [ ] system-high: swap config, zram or a real swap, none right now
-- [ ] system-high: earlyoom or systemd-oomd so heavy memory load doesn't hard-lock the box
-- [ ] system-high: firewall, confirm networking.firewall.enable and what's open
-- [ ] system-med: fwupd for firmware/bios updates from linux
-- [ ] system-med: boot.loader.systemd-boot.configurationLimit so the boot menu stops growing
-- [ ] system-med: scheduled backups (restic or borg), nothing protected in-repo now
-- [ ] system-low: btrfs/zfs snapshots if the filesystem supports it
-- [ ] system-low: dns hardening (systemd-resolved, optional doh)
-- [ ] system-low: printing (cups) + scanning (sane) + avahi discovery, if i ever print
-- [ ] system-low: vpn (tailscale or wireguard) for remote access
-- [ ] system-low: color profile / icc management for the monitors
-- [ ] system-low: hdr, not really there on sway yet, parked
-- [ ] system-low: apparmor profiles
-- [ ] system-low: secure boot via lanzaboote
-- [ ] system-low: polkit rules to tighten what soteria allows without a password
-- [ ] system-low: ntp/time sync confirmation, clock format i actually like
-- [ ] system-low: disable the pc speaker beep / system bell
+### desktop
+- [ ] per-app window rules: workspace assigns, scratchpad terminal
+- [ ] window resize/move binds, a dedicated resize mode
+- [ ] thunar thumbnails: ffmpegthumbnailer for video, poppler for pdf
+- [ ] gtk + qt theming for one consistent look, mismatched now
+- [ ] kanshi hotplug profiles, auto-apply the layout on monitor connect (laptop win)
+- [ ] volume/brightness osd, only the wiremix tui now
+- [ ] keybind cheatsheet overlay
+- [ ] caps lock remap, pointer accel/scroll settings
+- [ ] emoji picker on a keybind
+- [ ] mako do-not-disturb toggle for games and calls
+- [ ] per-monitor wallpapers or rotation
+- [ ] font rendering knobs (hinting, subpixel)
+- [ ] force or auto dark mode across gtk apps
+- [ ] cliphist size limit or clear on boot
+- [ ] clipboard-only screenshot grab, separate from satty
+- [ ] scratch note / quick-capture keybind
+- [ ] screen recording (wf-recorder or obs)
+
+### shell + tools
+- [ ] eza (ls), tealdeer (tldr), dust + duf, sd, yq, glow
+- [ ] jq, still not installed
+- [ ] yazi tui file manager
+- [ ] atuin shell history, decide deliberately
+- [ ] nh + nix-output-monitor for nicer rebuilds
+- [ ] nix-tree and nix-index for closure and package spelunking
+- [ ] comma, run any nixpkgs program without installing
+- [ ] tmux or zellij
+- [ ] git commit signing + a global gitignore
+
+### system
+- [ ] fstrim for ssd health
+- [ ] swap: zram or a real partition, none now
+- [ ] earlyoom or systemd-oomd so memory load can't hard-lock the box
+- [ ] firewall, confirm what's open
+- [ ] systemd-boot configurationLimit so the boot menu stops growing
+- [ ] scheduled backups (restic or borg), nothing protected now
+- [ ] dns hardening (systemd-resolved, optional doh)
+- [ ] vpn (tailscale or wireguard)
+- [ ] btrfs/zfs snapshots if the filesystem supports it
+- [ ] printing + scanning if the need ever comes up
+- [ ] monitor color/icc profiles
+- [ ] apparmor, secure boot (lanzaboote), tighter polkit rules
+- [ ] ntp/clock format
+- [ ] disable the pc speaker beep
+- [ ] hdr, parked, not really there on sway yet
 
 ## done:
 

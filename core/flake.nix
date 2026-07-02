@@ -32,7 +32,7 @@
         dev = false; # dev tools layer on top of polish
         gaming = false; # gaming layer on top of polish
         nvidia = false; # the proprietary nvidia gpu stack
-        arkenfox = false; # arkenfox-hardened firefox, requires uBlock script handling knowledge and exception management
+        arkenfox = false; # arkenfox-hardened firefox, needs manual uBlock and exception upkeep
       };
 
       # one call per machine, settings is common merged with per-host overrides

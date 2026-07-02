@@ -46,7 +46,7 @@ in
   };
 
   # enabling gtk hands home-manager the settings.ini, so every pref has to be set here.
-  # prefer-dark keeps thunar etc dark (was inherited from the old plasma gtk config), primary-paste off kills middle-click paste.
+  # prefer-dark keeps thunar etc dark, primary-paste off kills middle-click paste.
   gtk = {
     enable = true;
     # papirus-dark icon theme, light-on-dark for the dark desktop

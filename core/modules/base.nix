@@ -36,7 +36,7 @@
     LC_PAPER       = "en_IE.UTF-8"; # A4
     LC_MONETARY    = "en_IE.UTF-8"; # euro, formatted as €1,234.56
   };
-  # generate only the locales we use, keeps the closure small
+  # generate only the locales in use, keeps the closure small
   i18n.supportedLocales = [
     "C.UTF-8/UTF-8"
     "${settings.locale}/UTF-8"
@@ -146,7 +146,7 @@
       # nerd-fonts.caskaydia-cove # alt mono, patched cascadia code
       # nerd-fonts.sauce-code-pro # alt mono, source code pro
     ];
-    # point the generic family aliases at our fonts, otherwise nixos falls back to dejavu
+    # point the generic family aliases at the font set, otherwise nixos falls back to dejavu
     fontconfig.defaultFonts = {
       sansSerif = [ "Noto Sans" ];
       serif     = [ "Noto Serif" ];

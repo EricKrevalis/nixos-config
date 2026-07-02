@@ -7,7 +7,7 @@
 
   # services.printing.enable = true; # no printer on this machine, uncomment to add one
 
-  # daemon for the goxlr, needed for mic gain/type/routing since the device holds no usable config on its own
+  # daemon for the goxlr, mic gain/type/routing, the device holds no usable config on its own
   services.goxlr-utility.enable = true;
 
   # internal drives, always present on this machine
